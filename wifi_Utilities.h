@@ -13,10 +13,10 @@ const char* APpassword = "12345678";                  //Router Password - PASSWO
 #define USE_DEFAULT_IP false
 
 // Variables for Local network (Station)
-//const char* STssid = "EE-Hub-G3ge";
-//const char* STpassword = "stock-led-HALF";
-const char* STssid = "Skyrora_Works";
-const char* STpassword = "Barbos_1243%";
+const char* STssid = "EE-Hub-G3ge";
+const char* STpassword = "stock-led-HALF";
+//const char* STssid = "Skyrora_Works";
+//const char* STpassword = "Barbos_1243%";
 
 
 #define USE_STATIC_IP true             // Only effects parameters when in station mode
@@ -36,7 +36,7 @@ const char* STpassword = "Barbos_1243%";
 WiFiServer server(80);
 
 // Set your Static IP address
-IPAddress local_IP(192, 168, 1, 42);
+IPAddress local_IP(192, 168, 1, 4);
 // Set your Gateway IP address
 IPAddress gateway(192, 168, 1, 254);
 

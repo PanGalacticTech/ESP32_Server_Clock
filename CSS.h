@@ -69,7 +69,7 @@ void callCSS(WiFiClient client) {               // passed wifi client ?? it work
 
 
   // added line for text box;
-  //  client.println("input[type=number] {  width: 20%;  padding: 5px 5px;  margin: 2px 2px;  box-sizing: border-box;}"); // added line
+    client.println("input[type=number] {  width: 20%;  padding: 5px 5px;  margin: 2px 2px;  box-sizing: border-box;}"); // added line
 
 
   client.println("</style></head>");

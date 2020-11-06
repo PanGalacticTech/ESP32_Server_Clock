@@ -23,7 +23,7 @@
 
 timeObject simpleClock;
 
-#define INITAL_HOURS 0
+#define INITAL_HOURS 1
 #define INITAL_MINS 5
 #define INITAL_SECS 32
 
@@ -39,6 +39,7 @@ timeObject simpleClock;
 #include "dataParsing.h"
 #include "CSS.h"
 #include "htmlObjects.h"
+#include "html_webpage.h"
 
 
 
@@ -65,8 +66,8 @@ void setup() {
   Serial.begin(115200);
   delay(100);
 
-  setup_accessPoint();   //only set up to default IP at the moment 192.168.4.1
-  //  connectWifi_staticIP();
+ // setup_accessPoint();   //only set up to default IP at the moment 192.168.4.1
+   connectWifi_staticIP();
 
   delay(500);
   simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
@@ -96,3 +97,13 @@ void loop() {
   simpleClock.countdownPrint(FORCE_PRINT_CLOCK);
 
 }
+
+
+
+
+// countdown clock master variables:
+
+//simpleClock.countdown_master;
+//simpleClock.countdown_master.h;
+//simpleClock.countdown_master.m;
+///simpleClock.countdown_master.s;
