@@ -25,54 +25,69 @@ void numberInputBox(WiFiClient client, String boxLabel, String boxName, String c
 
 
 
-String countdownState = "off";
 
 
-void genericButton(WiFiClient client, String titleText, String currentState, String returnString) {
+
+void genericButton(WiFiClient client, String titleText, String buttonONText,  String currentState, String returnString) {
 
   client.println("<p>" + titleText + currentState + "</p>");
 
-  if (currentState == "off") {
-    client.println("<p><a href=\"/" + returnString + "/on\"><button class=\"button button2\">OFF</button></a></p>");
+  if (currentState == "on") {
+    //    client.println("<p><a href=\"/" + returnString + "/off\"><button class=\"button button2\"></button></a></p>");
   } else {
-    client.println("<p><a href=\"/" + returnString + "/off\"><button class=\"button\">ON</button></a></p>");
+    client.println("<p><a href=\"/" + returnString + "/on\"><button class=\"button\">" + buttonONText + "</button></a></p>");
   }
 }
 
-String countDown_Time = "00:01:32";
 
-void javaScript_timeHead(WiFiClient client){
+void toggleButton(WiFiClient client, String titleText, String buttonONtext, String buttonOFFtext, String currentState, String returnString) {
 
-// This Code goes in Head //
-client.println("<script>");
-client.println("function startTime() {");
-client.println("var today = new Date();");
-client.println("var h = today.getHours();");
-client.println("  var m = today.getMinutes();");
-client.println("  var s = today.getSeconds();");
-client.println("  m = checkTime(m);");
-client.println("  s = checkTime(s);");
-client.println("  document.getElementById('webTime').innerHTML =");
-client.println(" h + "":"" + m + \":\" + s;");
-client.println("  var t = setTimeout(startTime, 500);");
-client.println("}");
-client.println("function checkTime(i) {");
-client.println("  if (i < 10) {i = \"0\" + i};  // add zero in front of numbers < 10");
-client.println("  return i;");
-client.println("}");
-client.println("</script>");
-// </head>
+  client.println("<p>" + titleText + currentState + "</p>");
+
+  if (currentState == "on") {
+    client.println("<p><a href=\"/" + returnString + "/off\"><button class=\"button button2\">" + buttonOFFtext + "</button></a></p>");
+  } else {
+    client.println("<p><a href=\"/" + returnString + "/on\"><button class=\"button\">" + buttonONtext + "</button></a></p>");
+  }
 }
 
 
-void javascript_timeBody(WiFiClient client){
-// Code for body //
-client.println("<body onload=\"startTime()\">");
-
-client.println("<div id=\"webTime\"></div>");
 
 
-  
+String countDown_Time = "00:01:32";
+
+void javaScript_timeHead(WiFiClient client) {
+
+  // This Code goes in Head //
+  client.println("<script>");
+  client.println("function startTime() {");
+  client.println("var today = new Date();");
+  client.println("var h = today.getHours();");
+  client.println("  var m = today.getMinutes();");
+  client.println("  var s = today.getSeconds();");
+  client.println("  m = checkTime(m);");
+  client.println("  s = checkTime(s);");
+  client.println("  document.getElementById('webTime').innerHTML =");
+  client.println(" h + "":"" + m + \":\" + s;");
+  client.println("  var t = setTimeout(startTime, 500);");
+  client.println("}");
+  client.println("function checkTime(i) {");
+  client.println("  if (i < 10) {i = \"0\" + i};  // add zero in front of numbers < 10");
+  client.println("  return i;");
+  client.println("}");
+  client.println("</script>");
+  // </head>
+}
+
+
+void javascript_timeBody(WiFiClient client) {
+  // Code for body //
+  client.println("<body onload=\"startTime()\">");
+
+  client.println("<div id=\"webTime\"></div>");
+
+
+
 }
 
 
@@ -88,11 +103,13 @@ void pageContent(WiFiClient client) {    // Displays All the Content Displayed t
 
   numberInputBox(client, "Seconds", "secs", S);
 
-  genericButton(client, "Countdown State = ", countdownState, "toggle_count");
+  //  genericButton(client, "Start Countdown | Current State = ", "Start", countdownRun, "start_countdown");
 
- // javascript_timeBody(client); Does not work
+  //  genericButton(client, "Pause Countdown | Current State = ", "Pause", countdownPause, "pause_countdown");
+  // javascript_timeBody(client); Does not work
 
-  
+  toggleButton(client, "Toggle Countdown | Current State = ", "Start", "Pause", toggleCountdown, "toggle_countdown");
+
 
 
 }
@@ -115,9 +132,9 @@ void htmlPageHeading(WiFiClient client) {
   client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
   client.println("<link rel=\"icon\" href=\"data:,\">");
 
-//javaScript_timeHead(client);  << does not seem to work
+  //javaScript_timeHead(client);  << does not seem to work
 
-// Head closed by CSS Method
+  // Head closed by CSS Method
 }
 
 
@@ -133,7 +150,9 @@ void serverLoop() {
     Serial.println("New Client.");          // print a message out in the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
     while (client.connected()) {            // loop while the client's connected
+      //   Serial.println("While client.connected");
       if (client.available()) {             // if there's bytes to read from the client,
+        //   Serial.println("if client.available");
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
         header += c;                        // add that character to the header String
@@ -168,9 +187,16 @@ void serverLoop() {
 
             //  GPIOcontrol();       // Switch case for HTTP requests containing GPIO on/off commands
 
+            //  triggerCountdown = genericBoolcontrol("start_countdown");   //Bool header for start countdown header
+            //  Serial.print("Trigger Countdown:");
+            //  Serial.println(triggerCountdown);
+            //  triggerCountdownPause = genericBoolcontrol("pause_countdown");
+            // Serial.print("Trigger Pause:");
+            // Serial.println(triggerCountdownPause);
 
+            //  startPausecountdown(); // Controls the state of the clock based on bools returned above
 
-
+            toggleBoolcontrol("toggle_countdown");
 
             //------------------------------------------------String Parsing pwm updates----------------------------
 
@@ -206,8 +232,11 @@ void serverLoop() {
 
             // end the HTML body
             client.println("</body></html>");
+
             // The HTTP response ends with another blank line
             client.println();
+            //added line below to force close:
+            //  client.stop();
             // Break out of the while loop
             break;
           } else { // if you got a newline, then clear currentLine
@@ -217,6 +246,7 @@ void serverLoop() {
           currentLine += c;      // add it to the end of the currentLine
         }
       }
+
     }
     // Clear the header variable
     header = "";

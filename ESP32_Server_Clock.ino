@@ -1,14 +1,14 @@
 /*********
-  ESP32 SAD Lamp Controller
+  ESP32 Web Server Clock Controller
 
   Use a web server
   accessed over
   local network to
-  control a relay.
+  control a clock
 
 
   Declan Heard
-  31/08/2020
+  06/11/2020
 *********/
 
 // Load Wi-Fi library
@@ -16,17 +16,20 @@
 
 
 
-
-// Include Time Libary
-#include "time.h"
-
-const char* ntpServer = "pool.ntp.org";
-const long  gmtOffset_sec = 0;
-const int   daylightOffset_sec = 3600;
-
-
 // Load other Librarys
 //#include <buttonObject.h>
+
+#include <timeObject.h>
+
+timeObject simpleClock;
+
+#define INITAL_HOURS 0
+#define INITAL_MINS 5
+#define INITAL_SECS 32
+
+#define FORCE_PRINT_CLOCK false
+
+
 #include <autoDelay.h>
 #include "globals.h"
 
@@ -60,29 +63,19 @@ autoDelay testPrintDelay;
 void setup() {
 
   Serial.begin(115200);
-
-
-
   delay(100);
 
   setup_accessPoint();   //only set up to default IP at the moment 192.168.4.1
-
-//  connectWifi_staticIP();
+  //  connectWifi_staticIP();
 
   delay(500);
+  simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
 
-  /*
-    // Init and get the time
-    configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-    delay(100);
-    printLocalTime();
-
-  */
-
+  // simpleClock.countdownStart();   // for testing, else we want countdown paused untill triggered
 
 
 }
-//------------------------------------^^^^--------Setup---------------------------------------
+
 
 
 
@@ -92,15 +85,14 @@ void loop() {
 
   serverLoop();
 
+  // Call in every loop
+  simpleClock.countdownLoop();
 
 
-  if (timePrintDelay.millisDelay(1000)) {
-   // testTime();
-  }
+  
+
+  // Prints the clock every time seconds change.
+  //Can be forced to print by passing true as an argument
+  simpleClock.countdownPrint(FORCE_PRINT_CLOCK);
+
 }
-//----------------------------------------^^^----Main Loop-------------------------------------
-
-
-
-//
-//--

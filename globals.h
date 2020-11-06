@@ -1,7 +1,21 @@
 
+// New Variables
+
+bool triggerCountdown;
+
+bool triggerCountdownPause;
+
+String toggleCountdown = "off";
+
+String countdownRun = "off";
+String countdownPause = "on";
+
+String H = "00";
+String M = "01";
+String S = "60";
 
 
-
+// Old Variables
 
 int lampBrightness;   // variable to hold the output value for PWM
 
@@ -48,9 +62,6 @@ int greenPWM = 100;                             // Green LED Level
 int bluePWM = 100;                               // Blue LED Level
 
 
-String H = "00";
-String M = "01";
-String S = "60";
 
 String R = "255";                                 // Strings to hold PWM values which are printed to the browser when called
 String G = "255";
