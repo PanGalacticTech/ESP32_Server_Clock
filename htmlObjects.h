@@ -17,7 +17,7 @@ void numberInputBox(WiFiClient client, String boxLabel, String boxName, String c
   client.println("<div class= \"centerBox\">");
   client.println("<div class= \"flexBox\">");   // centered box
   client.println("<form action='/' class=\"inputForm\" method=get >"); //uses IP/port of web page
-  client.println("<input type=\"number\" name=\"" + boxName + "\" min =\"0\" max =\"99\" value= " + currentValue + "  style=\"width: 3em\"><br>");
+  client.println("<input type=\"number\" name=\"" + boxName + "\" min =\"0\" max =\"60\" value= " + currentValue + "  style=\"width: 3em\"><br>");
 
   client.println("</br> <input type=\"submit\" value=\"Apply\">");
   client.println("</form> </div> </br>");
@@ -55,6 +55,8 @@ void toggleButton(WiFiClient client, String titleText, String buttonONtext, Stri
 }
 
 
+// This is in javascript.h for now, just for referencing variables
+
 
 // Display a static Clock on the webpage
 void webDisplayClockStatic(WiFiClient client){
@@ -70,44 +72,6 @@ client.println("</div> </br>");
 client.println("</div> </br>");
 
   
-}
-
-
-// Live Clock - Broken atm
-String countDown_Time = "00:01:32";
-
-void javaScript_timeHead(WiFiClient client) {
-
-  // This Code goes in Head //
-  client.println("<script>");
-  client.println("function startTime() {");
-  client.println("var today = new Date();");
-  client.println("var h = today.getHours();");
-  client.println("  var m = today.getMinutes();");
-  client.println("  var s = today.getSeconds();");
-  client.println("  m = checkTime(m);");
-  client.println("  s = checkTime(s);");
-  client.println("  document.getElementById('webTime').innerHTML =");
-  client.println(" h + "":"" + m + \":\" + s;");
-  client.println("  var t = setTimeout(startTime, 500);");
-  client.println("}");
-  client.println("function checkTime(i) {");
-  client.println("  if (i < 10) {i = \"0\" + i};  // add zero in front of numbers < 10");
-  client.println("  return i;");
-  client.println("}");
-  client.println("</script>");
-  // </head>
-}
-
-
-void javascript_timeBody(WiFiClient client) {
-  // Code for body //
-  client.println("<body onload=\"startTime()\">");
-
-  client.println("<div id=\"webTime\"></div>");
-
-
-
 }
 
 

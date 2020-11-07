@@ -116,69 +116,29 @@ int32_t numericalDataParse(String headerText, int32_t origionalValue) {
     header.toCharArray(copy, stringLength);                     // copy the String - header. to char copy
     // This data is now indexed and can be sorted.
 
-    /*
-        int j = 0;                                               // another variable to be used along with i to control indexes
-        char u[4];                                              // char array to hold our new numerical value
+    int pointer = header.indexOf("=");                            // find the location of the = sign
 
-        for (int i = 13; i < 16; i++) {                       // Example of copy[] = GET /?redPWM=100 max is 16, start of int is 13
-          u[j] = copy[i];
-          j++;                                                  // increment j along with for loop
-        }
-    */
-    /*
-        char u[4];
-        int pointer;
 
-        for (int i = 0; i < 20; i++) {               // find the location of the equals sign
-          if (&copy[i] == "=") {
-            pointer = i + 1;                           // save the location of the first integer value
-            Serial.print("Pointer: ");
-            Serial.println(pointer);
-          }
-        }
+    char u[4];   // Char array to hold the integer value
+    int y = 0;      // Iterator value for char u
 
-        int y;
-        for (int i = pointer; i < (pointer + 3); i++) {      // copy the string from the pointer to pointer+3
-          u[y] = copy[i];
-          Serial.println(u[y]);
-          y++;
-        }
 
-      //   Serial.println(u);
-    */
-
-    char *pch;
-
-    pch = strchr(copy, '=');
-    // while (pch != NULL) {
-      Serial.printf("%d\n", pch - copy + 1);
-    //  pch = strchr(pch + 1, '=');
-    // }
-
-int pointer = atoi(pch);
-
-Serial.println(pointer);
-    
-
-    char u[4];
-    int y = 0;
-    for (int i = &pch; i < (&pch + 3); i++) {      // copy the string from the pointer to pointer+3
-     u[y] = copy[i];
-      Serial.println(u[y]);
-     y++;
+    for (int i = pointer + 1; i < (pointer + 4); i++) {      // copy the string from the pointer to pointer+3
+      u[y] = copy[i];
+      Serial.println(u[y]);                                  // print the result as it iterates
+      y++;
     }
 
+    Serial.println("Extracted Char Array:");               // Printing for testing
+    Serial.println(u);
 
 
-
-    // int32_t extractedData = atoi( u );                                 // put char array into extracted data value as int.
-
-
+    int32_t extractedData = atoi( u );                                 // put char array into extracted data value as int.
 
 
 
     Serial.print("Extracted Numerical Value: ");
-    //  Serial.println(extractedData);
+    Serial.println(extractedData);
 
 
 
@@ -188,7 +148,7 @@ Serial.println(pointer);
     }
 
     // return extractedData;
-    return 0;
+    return extractedData;
   } else {
     return origionalValue;
   }
@@ -208,4 +168,19 @@ void updateClock() {
   simpleClock.countdown_master.s = numericalDataParse("secs", simpleClock.countdown_master.s);
 
 
+}
+
+
+void resetClock(String triggerValue) {
+  if (header.indexOf("GET /" + triggerValue + "/on") >= 0) {
+    simpleClock.countdownStop();           // pause the countdown
+    simpleClock.countdownSetup(0, 10, 30);
+  }
+}
+
+
+void resetEverything(String triggerValue) {
+  if (header.indexOf("GET /" + triggerValue + "/on") >= 0) {
+    ESP.restart();;
+  }
 }

@@ -164,7 +164,14 @@ void connectWifi_staticIP() {
 }
 
 
-
+// ~~~~~~~~ Wifi Utilities ~~~~~~~~
+/*
+ *  Off the Shelf Functions for setting up ESP32 wifi modules
+ * 
+ * 
+ * 
+ * 
+ */
 
 
 

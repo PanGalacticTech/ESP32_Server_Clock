@@ -39,6 +39,8 @@ timeObject simpleClock;
 #include "dataParsing.h"
 #include "CSS.h"
 #include "htmlObjects.h"
+#include "javascript.h"
+
 #include "html_webpage.h"
 
 
