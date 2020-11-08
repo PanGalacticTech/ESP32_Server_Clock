@@ -13,6 +13,11 @@
 
 // Load Wi-Fi library
 #include <WiFi.h>
+#include <tinyxml2.h>
+
+using namespace tinyxml2;
+
+char * live_clock = "<root><element>7</element></root>";
 
 
 
@@ -54,6 +59,7 @@ autoDelay testPrintDelay;
 
 
 
+XMLDocument xmlDocument;
 
 
 
@@ -75,6 +81,9 @@ void setup() {
   simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
 
   // simpleClock.countdownStart();   // for testing, else we want countdown paused untill triggered
+
+
+
 
 
 }

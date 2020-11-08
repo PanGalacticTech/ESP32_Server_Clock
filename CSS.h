@@ -22,6 +22,8 @@ void callCSS(WiFiClient client) {               // passed wifi client ?? it work
 
  // client.println("body {background-color: #212121; color:#e68a00;}");  // Old Style
  client.println("body {background-color: #212121; color:#f0f0f0;}");
+
+ client.println("p1 { text-align: center;  font-size: 20px;  margin-top: 2px;}"); // added for live clock
  
 
   client.println(".button { background-color: #00cccc; border: none; color: white; padding: 16px 20px;");

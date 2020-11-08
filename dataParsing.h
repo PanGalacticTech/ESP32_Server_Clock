@@ -174,7 +174,9 @@ void updateClock() {
 void resetClock(String triggerValue) {
   if (header.indexOf("GET /" + triggerValue + "/on") >= 0) {
     simpleClock.countdownStop();           // pause the countdown
+    toggleCountdown = "off";
     simpleClock.countdownSetup(0, 10, 30);
+
   }
 }
 

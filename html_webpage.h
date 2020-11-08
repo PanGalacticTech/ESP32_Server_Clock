@@ -27,15 +27,16 @@ void pageContent(WiFiClient client) {    // Displays All the Content Displayed t
 
   toggleButton(client, "Toggle Countdown | Current State = ", "Start", "Pause", toggleCountdown, "toggle_countdown");
 
-  webDisplayClockStatic(client);
-  
+  webDisplayClockStatic(client);   // Non javascript Static Text clock (updates on pageload)
+
   // Javascript Clock Updater:
- // javascriptVariables(client);   Does not work yet
-  
+
+//  javascriptClockItem(client);   // Does not function Yet
+
 
 
   toggleButton(client, "Reset Clock ", "Reset", "", "" , "reset_clock");   // Button to Reset Clock
-  
+
   toggleButton(client, "Restart ESP || Current State = ", "Restart", "", "On" , "reset_esp");   // Button to Reboot ESP
 }
 
@@ -48,7 +49,7 @@ void dataSortingMethods(WiFiClient client) {
 
   // Boolean Data Parsing
 
-  toggleBoolcontrol("toggle_countdown");
+  toggleBoolcontrol("toggle_countdown");     // start/pause button data parsing
 
   resetClock("reset_clock");   // Method to restart ESP from GUI button
 
@@ -56,7 +57,9 @@ void dataSortingMethods(WiFiClient client) {
 
   // Numerical Data Parsing
 
-  updateClock();
+  updateClock();      // updates clock with values from numerical input boxes
+
+  // clockData_toJson(client, simpleClock.countdown_master.h, simpleClock.countdown_master.m, simpleClock.countdown_master.s );    // Updater for live clock
 }
 
 

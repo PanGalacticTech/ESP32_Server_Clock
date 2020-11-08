@@ -20,7 +20,7 @@ void numberInputBox(WiFiClient client, String boxLabel, String boxName, String c
   client.println("<input type=\"number\" name=\"" + boxName + "\" min =\"0\" max =\"60\" value= " + currentValue + "  style=\"width: 3em\"><br>");
 
   client.println("</br> <input type=\"submit\" value=\"Apply\">");
-  client.println("</form> </div> </br>");
+  client.println("</form> </div> </br> ");
   //client.println("</div>");
 
 }
@@ -61,15 +61,13 @@ void toggleButton(WiFiClient client, String titleText, String buttonONtext, Stri
 // Display a static Clock on the webpage
 void webDisplayClockStatic(WiFiClient client){
 
-  client.println("<div class= \"centerBox\">");
-  client.println("<div class= \"flexBox\">"); 
+ // client.println("<div class= \"centerBox\">");
+ // client.println("<div class= \"flexBox\">"); 
 
  client.println("<h1>"+simpleClock.countdown_clock_string+"</h1>");
-
-
   
-client.println("</div> </br>");
-client.println("</div> </br>");
+//client.println("</div> ");
+//client.println("</div> ");
 
   
 }
