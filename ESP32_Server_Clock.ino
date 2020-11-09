@@ -66,7 +66,7 @@ autoDelay testPrintDelay;
 
 XMLDocument xmlDocument;
 
-
+#define BRIGHTNESS 30
 
 
 
@@ -86,7 +86,7 @@ void setup() {
 
   delay(500);
   // Set up neopixles and set start colour
-  displaySetup(); 
+  displaySetup(BRIGHTNESS); 
   delay(100);
 
   simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);

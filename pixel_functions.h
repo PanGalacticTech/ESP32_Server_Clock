@@ -51,10 +51,10 @@ void printArora(uint32_t animationDelay = 500 ) {
 }
 
 
-void displaySetup(){
+void displaySetup(int8_t setupBrightness){
  Serial.println("Clock Initializing...");
 
-  countdownClock.sevenSegSetup();
+  countdownClock.sevenSegSetup(setupBrightness);
 
   Serial.println("Seven Seg Setup");
   
