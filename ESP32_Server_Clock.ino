@@ -66,7 +66,7 @@ autoDelay testPrintDelay;
 
 XMLDocument xmlDocument;
 
-#define BRIGHTNESS 30
+#define BRIGHTNESS 10
 
 
 

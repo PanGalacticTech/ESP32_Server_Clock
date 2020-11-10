@@ -1,5 +1,32 @@
 
 
+
+void light_dots(bool turn_On){
+
+  
+}
+
+
+void light_t(bool turn_On){
+
+  
+}
+
+
+
+void light_plusminus(bool light_plus){   // Could be pass bool as argument to light the + sign, or just use global variables
+
+if (countdownClock.tminus){
+// Light up Just the - Symbol  
+} else {
+  // Light up the Plus & the Minus symbol
+}
+  
+}
+
+
+
+
 // function to take a number and return the most significant figure
 
 int32_t return_most_sf(int32_t input){
