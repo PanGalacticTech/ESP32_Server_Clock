@@ -13,12 +13,6 @@
 
 // Load Wi-Fi library
 #include <WiFi.h>
-#include <tinyxml2.h>
-
-using namespace tinyxml2;
-
-//char * live_clock = {"<root><element>7</element></root>"};
-
 
 
 // Load other Librarys
@@ -28,19 +22,28 @@ using namespace tinyxml2;
 
 timeObject simpleClock;
 
-#define INITAL_HOURS 1
-#define INITAL_MINS 5
-#define INITAL_SECS 32
-
 #define FORCE_PRINT_CLOCK false
+
+
+// Variables for NeoPixels (Must go above // "#include <pixelSevenSegment.h>"
+
+
 
 #include <pixelSevenSegment.h>
 
 pixelSevenSegment countdownClock;
 
+#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make code more readable
+
+
+
+//#define MAX_BRIGHTNESS 20
+#define BRIGHTNESS 15
+
+
 #include "pixel_functions.h"
 
-#include <autoDelay.h>
+//#include <autoDelay.h>
 #include "globals.h"
 
 // Outputs
@@ -57,20 +60,26 @@ pixelSevenSegment countdownClock;
 
 
 
-autoDelay timePrintDelay;
+//autoDelay timePrintDelay;
 
-autoDelay testPrintDelay;
+//autoDelay testPrintDelay;
 
+//Options
 
-
-
-XMLDocument xmlDocument;
-
-#define BRIGHTNESS 10
-
+#define INITAL_HOURS 1
+#define INITAL_MINS 5
+#define INITAL_SECS 32
 
 
-uint8_t maxBrightness = 20;                      // Define the max brightness of all LEDs. 0 - 255. 20-50 reccomended for testing: MUST use seperate 5v supply for full brightness operation! Do not use USB power!
+
+
+
+#define COUNTDOWN_COLOUR countdownClock.skyroraBlue
+#define COUNTUP_COLOUR countdownClock.pureWhite
+
+
+
+//uint8_t maxBrightness = 20;                      // Define the max brightness of all LEDs. 0 - 255. 20-50 reccomended for testing: MUST use seperate 5v supply for full brightness operation! Do not use USB power!
 
 
 
@@ -86,8 +95,10 @@ void setup() {
 
   delay(500);
   // Set up neopixles and set start colour
-  displaySetup(BRIGHTNESS); 
+  displaySetup(BRIGHTNESS);
   delay(100);
+
+  countdownClock.changeColourStruc( COUNTDOWN_COLOUR );
 
   simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
 
@@ -111,18 +122,21 @@ void loop() {
   // Call in every loop, updates the master clock
   simpleClock.countdownLoop();
 
-
+if (simpleClock.tzero){
+  countdownClock.changeColourStruc(COUNTUP_COLOUR);
+  simpleClock.tzero = false;
+}
 
 
   //Serial Prints the clock every time seconds change.
   //Can be forced to print always by passing true as an argument
   simpleClock.countdownPrint(FORCE_PRINT_CLOCK);
 
-// need function here to split master clock into MSF and LSFs
-// Set up displayed digits with correct bit arrays for the current time
-//simpleClock.countdown_master.h;
-//simpleClock.countdown_master.m;
-///simpleClock.countdown_master.s;
+  // need function here to split master clock into MSF and LSFs
+  // Set up displayed digits with correct bit arrays for the current time
+  //simpleClock.countdown_master.h;
+  //simpleClock.countdown_master.m;
+  ///simpleClock.countdown_master.s;
   countdownClock.displayedDigits[0] = countdownClock.alldigits[return_least_sf(simpleClock.countdown_master.s)];
   countdownClock.displayedDigits[1] = countdownClock.alldigits[return_most_sf(simpleClock.countdown_master.s)];
 
@@ -132,33 +146,18 @@ void loop() {
   countdownClock.displayedDigits[4] = countdownClock.alldigits[return_least_sf(simpleClock.countdown_master.h)];
   countdownClock.displayedDigits[5] = countdownClock.alldigits[return_most_sf(simpleClock.countdown_master.h)];
 
-/*
-  countdownClock.displayedDigits[0] = countdownClock.alldigits[0];
-  countdownClock.displayedDigits[1] = countdownClock.alldigits[1];
-  countdownClock.displayedDigits[2] = countdownClock.alldigits[2];
-  countdownClock.displayedDigits[3] = countdownClock.alldigits[3];
-  countdownClock.displayedDigits[4] = countdownClock.alldigits[4];
-  countdownClock.displayedDigits[5] = countdownClock.alldigits[5];
-*/
-
 
   //Set The digit with the data passed from presaved bit arrays
 
-for (int q = 0; q < 6; q++){
-  
-  countdownClock.setDigit(countdownClock.displayedDigits[q], q, CURRENT_COLOUR.r, CURRENT_COLOUR.g, CURRENT_COLOUR.b);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  for (int q = 0; q < 6; q++) {
+    countdownClock.setDigit(countdownClock.displayedDigits[q], q, CURRENT_COLOUR.r, CURRENT_COLOUR.g, CURRENT_COLOUR.b);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  }
 
 
-//  Serial.printf("Set Digit %i to ~", q);
-  //Serial.println("");
-
-}
-
-
-if (simpleClock.time_updated){
-  FastLED.show();
-  simpleClock.time_updated = false;
-}
+  if (simpleClock.time_updated) {
+    FastLED.show();
+    simpleClock.time_updated = false;
+  }
 
 
 

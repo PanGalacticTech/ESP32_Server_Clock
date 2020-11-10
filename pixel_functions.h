@@ -3,7 +3,11 @@
 
 void light_dots(bool turn_On){
 
-  
+if (turn_On){
+countdownClock.setDots(CURRENT_COLOUR.r, CURRENT_COLOUR.g, CURRENT_COLOUR.b);
+} else {
+ countdownClock.setDots(0, 0, 0); //   
+}
 }
 
 
@@ -16,7 +20,7 @@ void light_t(bool turn_On){
 
 void light_plusminus(bool light_plus){   // Could be pass bool as argument to light the + sign, or just use global variables
 
-if (countdownClock.tminus){
+if (simpleClock.tminus){
 // Light up Just the - Symbol  
 } else {
   // Light up the Plus & the Minus symbol
