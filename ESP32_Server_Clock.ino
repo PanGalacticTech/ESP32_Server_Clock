@@ -29,13 +29,14 @@ timeObject simpleClock;
 
 
 
-#include <pixelSevenSegment.h>
+#include "pixelSevenSegment.h"
 
 pixelSevenSegment countdownClock;
 
 #define CURRENT_COLOUR countdownClock.currentColour    // Macro to make code more readable
-
-
+#define COUNTDOWN_COLOUR countdownClock.skyroraBlue
+#define COUNTUP_COLOUR countdownClock.pureWhite
+#define BLACK countdownClock.blackout
 
 //#define MAX_BRIGHTNESS 20
 #define BRIGHTNESS 15
@@ -66,16 +67,14 @@ pixelSevenSegment countdownClock;
 
 //Options
 
-#define INITAL_HOURS 1
-#define INITAL_MINS 5
-#define INITAL_SECS 32
+#define INITAL_HOURS 0
+#define INITAL_MINS 10
+#define INITAL_SECS 55
 
 
 
 
 
-#define COUNTDOWN_COLOUR countdownClock.skyroraBlue
-#define COUNTUP_COLOUR countdownClock.pureWhite
 
 
 
@@ -91,14 +90,21 @@ void setup() {
   delay(100);
 
   setup_accessPoint();   //only set up to default IP at the moment 192.168.4.1
-  //  connectWifi_staticIP();
+  //  connectWifi_staticIP();  // connects to wifi with static IP address
 
   delay(500);
   // Set up neopixles and set start colour
   displaySetup(BRIGHTNESS);
+  countdownClock.changeColourStruc( COUNTDOWN_COLOUR );
+
+  delay (1000);
+  light_dots(true);
+  light_t(true);
+  light_minus(true);
+
   delay(100);
 
-  countdownClock.changeColourStruc( COUNTDOWN_COLOUR );
+
 
   simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
 
@@ -122,10 +128,14 @@ void loop() {
   // Call in every loop, updates the master clock
   simpleClock.countdownLoop();
 
-if (simpleClock.tzero){
-  countdownClock.changeColourStruc(COUNTUP_COLOUR);
-  simpleClock.tzero = false;
-}
+  if (simpleClock.tzero) {
+    countdownClock.changeColourStruc(COUNTUP_COLOUR);
+    light_dots(true);
+    light_t(true);
+    light_plus(true);
+    simpleClock.tzero = false;
+  }
+
 
 
   //Serial Prints the clock every time seconds change.
@@ -154,6 +164,7 @@ if (simpleClock.tzero){
   }
 
 
+// if the time has been updated, print the new data to the clock display
   if (simpleClock.time_updated) {
     FastLED.show();
     simpleClock.time_updated = false;

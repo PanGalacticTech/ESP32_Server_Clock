@@ -175,6 +175,10 @@ void resetClock(String triggerValue) {
   if (header.indexOf("GET /" + triggerValue + "/on") >= 0) {
     simpleClock.countdownStop();           // pause the countdown
     toggleCountdown = "off";
+    countdownClock.changeColourStruc( COUNTDOWN_COLOUR );
+    light_minus(true);
+    light_dots(true);
+    light_t(true);
     simpleClock.countdownSetup(0, 10, 30);
 
   }
@@ -183,6 +187,7 @@ void resetClock(String triggerValue) {
 
 void resetEverything(String triggerValue) {
   if (header.indexOf("GET /" + triggerValue + "/on") >= 0) {
+    disconnectWIFI();  // Probably better practice
     ESP.restart();;
   }
 }

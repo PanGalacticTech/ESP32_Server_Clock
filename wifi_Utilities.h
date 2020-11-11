@@ -94,6 +94,8 @@ void setup_accessPoint() {
   Serial.print("Setting AP (Access Point)…");
   // Remove the password parameter, if you want the AP (Access Point) to be open
 
+//  WiFi.hostname("relay");
+
   if (USE_AP_PASSWORD) {
     WiFi.softAP(APssid, APpassword);
   } else {
