@@ -39,7 +39,7 @@ pixelSevenSegment countdownClock;
 #define BLACK countdownClock.blackout
 
 //#define MAX_BRIGHTNESS 20
-#define BRIGHTNESS 15
+#define BRIGHTNESS 14
 
 
 #include "pixel_functions.h"

@@ -52,6 +52,16 @@ void pixelSevenSegment::sevenSegSetup(byte brightness) {
 
 }
 
+
+
+
+void pixelSevenSegment::flyingDigit(digitSeg in, savedColour inputColour, uint32_t animationDelay){
+   int iteration = 0;  // this variable needs to be external
+   pixelSevenSegment::setDigit_colourName(in, iteration, inputColour); 
+   iteration++;
+}
+
+
 void pixelSevenSegment::setAllDigitsX(digitSeg X, byte r, byte g, byte b) {
 
   pixelSevenSegment::setDigit(X, 0, r, g, b);
@@ -83,7 +93,10 @@ void pixelSevenSegment::setDigitsBlank() {  // Method to set all digits to black
 
 
 
+void pixelSevenSegment::setDigit_colourName(digitSeg input, int8_t digitNum, savedColour inputColour){
 
+  pixelSevenSegment::setDigit(input, digitNum, inputColour.r, inputColour.g, inputColour.b);
+}
 
 
 void pixelSevenSegment::setDigit (digitSeg current, int8_t digitNumber, uint8_t red, uint8_t green, uint8_t blue ) {           // This function sets the first digit based on the data structure passed to it.

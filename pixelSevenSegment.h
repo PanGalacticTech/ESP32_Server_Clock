@@ -73,7 +73,7 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 #define MAX_BRIGHTNESS 20
 
 
-#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
+//#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
 
 
 
@@ -119,10 +119,12 @@ class pixelSevenSegment {
 
     void setDigit (digitSeg current, int8_t digitNumber, uint8_t red, uint8_t green, uint8_t blue );
 
-    void setDotsRGB(uint8_t red = 255, uint8_t green = 255, uint8_t blue = 255);
 
 
-    void setStringRGB(uint16_t start, uint16_t to, uint8_t red, uint8_t green, uint8_t blue);
+    void setDotsRGB(uint8_t red = 255, uint8_t green = 255, uint8_t blue = 255);   // Ignore does not work atm
+
+
+    void setStringRGB(uint16_t start, uint16_t to, uint8_t red, uint8_t green, uint8_t blue);   // Sets any string of LEDs to the passed colour values
 
 
 
@@ -253,8 +255,11 @@ class pixelSevenSegment {
     void changeColourRGB(byte red, byte green, byte blue);
     void changeColourStruc(savedColour newColour);
 
+    void  setDigit_colourName(digitSeg input, int8_t digitNum, savedColour inputColour);
     void setDotsName(savedColour newColour);
     void setStringName(uint16_t start, uint16_t to, savedColour newColour);
+
+    void flyingDigit(digitSeg in, savedColour inputColour,uint32_t animationDelay = 100);
 
     uint8_t currentBrightness;
 
@@ -263,13 +268,10 @@ class pixelSevenSegment {
 
 
 
-
-
-
   private:
 
 
-
+    uint8_t iteration = 0;   // used for iterating animation effects through mulitple loops
 
 
 
