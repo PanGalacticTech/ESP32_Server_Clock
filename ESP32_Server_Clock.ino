@@ -39,7 +39,7 @@ pixelSevenSegment countdownClock;
 
 // .......User Options......
 // Colours
-#define COUNTDOWN_COLOUR countdownClock.skyroraBlue
+#define COUNTDOWN_COLOUR countdownClock.skyBlue
 //#define COUNTDOWN_COLOUR countdownClock.pureBlue
 #define COUNTUP_COLOUR countdownClock.pureWhite
 #define BLACK countdownClock.blackout
@@ -58,7 +58,7 @@ pixelSevenSegment countdownClock;
 #define INTRO_ANIMATION true
 
 // GUI
-String PAGE_HEADER = {"Skyrora Countdown Clock"};    // Text displayed as GUI header
+String PAGE_HEADER = {"Pan Galactic Countdown Clock"};    // Text displayed as GUI header
 
 #include "animations.h"        // Contains all the animations called by pixel_functions.h
 #include "pixel_functions.h"
