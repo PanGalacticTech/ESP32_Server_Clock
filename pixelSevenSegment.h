@@ -236,7 +236,7 @@ class pixelSevenSegment {
     // Pick and Name Colours here, then add them to the colourArray to make them easily accessable
 
 
-    savedColour  skyroraBlue = { 0, 80, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+    savedColour  skyBlue = { 0, 80, 255};    // Data structure for "skyroraBlue" colour as an RGB value
 
     savedColour     pureBlue = {0, 0, 255};
 
@@ -251,7 +251,7 @@ class pixelSevenSegment {
     savedColour  currentColour;                  // data structure to hold the current LED colour
 
 
-    savedColour colourArray[4] = {skyroraBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
+    savedColour colourArray[4] = {skyBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
 
     uint8_t colourSelect = 0;  // Variable to hold the current selected colour from colourArray
 
