@@ -34,14 +34,33 @@ timeObject simpleClock;
 pixelSevenSegment countdownClock;
 
 #define CURRENT_COLOUR countdownClock.currentColour    // Macro to make code more readable
+
+
+
+// .......User Options......
+// Colours
 #define COUNTDOWN_COLOUR countdownClock.skyroraBlue
+//#define COUNTDOWN_COLOUR countdownClock.pureBlue
 #define COUNTUP_COLOUR countdownClock.pureWhite
 #define BLACK countdownClock.blackout
+//Brightness
+#define COUNTDOWN_BRIGHTNESS 255
+#define COUNTUP_BRIGHTNESS 130
 
 //#define MAX_BRIGHTNESS 20
-#define BRIGHTNESS 14
+#define BRIGHTNESS 255                 // Used for initial brightness during setup
 
+//Clock Defaults
+#define INITAL_HOURS 0        // This is also the default value the clock "resets to"
+#define INITAL_MINS 1
+#define INITAL_SECS 30
 
+#define INTRO_ANIMATION true
+
+// GUI
+String PAGE_HEADER = {"Skyrora Countdown Clock"};    // Text displayed as GUI header
+
+#include "animations.h"        // Contains all the animations called by pixel_functions.h
 #include "pixel_functions.h"
 
 //#include <autoDelay.h>
@@ -65,11 +84,7 @@ pixelSevenSegment countdownClock;
 
 //autoDelay testPrintDelay;
 
-//Options
 
-#define INITAL_HOURS 0
-#define INITAL_MINS 10
-#define INITAL_SECS 55
 
 
 
@@ -111,7 +126,7 @@ void setup() {
   // simpleClock.countdownStart();   // for testing, else we want countdown paused untill triggered
 
 
-
+  countdownClock.changeBrightness(COUNTDOWN_BRIGHTNESS);    // Just in case countdown brightness is different to setup brightness
 
 }
 
@@ -130,6 +145,7 @@ void loop() {
 
   if (simpleClock.tzero) {
     countdownClock.changeColourStruc(COUNTUP_COLOUR);
+    countdownClock.changeBrightness(COUNTUP_BRIGHTNESS);
     light_dots(true);
     light_t(true);
     light_plus(true);
@@ -164,7 +180,7 @@ void loop() {
   }
 
 
-// if the time has been updated, print the new data to the clock display
+  // if the time has been updated, print the new data to the clock display
   if (simpleClock.time_updated) {
     FastLED.show();
     simpleClock.time_updated = false;

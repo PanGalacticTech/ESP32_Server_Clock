@@ -86,28 +86,9 @@ int32_t return_least_sf(int32_t input) {
 }
 
 
-// Animations
-void printArora(uint32_t animationDelay = 500 ) {
 
 
-  for (int j = 6; j > 0 ; j--) {
 
-
-    countdownClock.setDigit(countdownClock.A, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-    countdownClock.setDigit(countdownClock.r, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-    countdownClock.setDigit(countdownClock.o, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-    countdownClock.setDigit(countdownClock.r, 3 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-    countdownClock.setDigit(countdownClock.A, 2 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-    countdownClock.setDigit(countdownClock.blank, 1 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-
-    Serial.printf("Set Digit %i 8" , j);
-    Serial.println("");
-    FastLED.show();
-    delay(animationDelay);
-  }
-
-
-}
 
 
 void displaySetup(int8_t setupBrightness) {
@@ -139,6 +120,19 @@ void displaySetup(int8_t setupBrightness) {
     delay(100);
   }
 
+  // added here 04.12.2020
+  light_dots(true);
+  FastLED.show();
+  delay(100);
+  light_minus(true);
+  FastLED.show();
+  delay(100);
+  light_plus(true);
+  FastLED.show();
+  delay(100);
+  light_t(true);
+  FastLED.show();
+
 
 
   delay(1000);
@@ -146,16 +140,34 @@ void displaySetup(int8_t setupBrightness) {
   delay(100);
   FastLED.show();
   Serial.println("Setting Digits Blank");
-  delay(500);
+  delay(200);
 
   //countdownClock.setAllDigitsX(countdownClock.H, 255, 255, 255);
 
-  //  printArora();
+  if (INTRO_ANIMATION) {
+    light_dots(false);
+    light_t(false);
+    light_plus(false);
+    FastLED.show();
+    delay(200);
+    flashFrom(100, 1000);
+    countdownClock.setDigitsBlank();   // Set all digits to blank
+    delay(100);
+    animateScotland(200, 700);
+    countdownClock.setDigitsBlank();   // Set all digits to blank
+    delay(100);
+    flashTo(800);
+    delay(100);
+    countdownClock.setDigitsBlank();   // Set all digits to blank
+    // animateSpace(400);
+    flashSpace(70, 1000);
+  }
+
   delay(100);
   FastLED.show();
   Serial.println("Setup Complete, Clock Starting:");
 
-  delay(2000);
+  delay(1000);
   countdownClock.setDigitsBlank();   // Set all digits to blank
   delay(100);
   FastLED.show();

@@ -176,10 +176,11 @@ void resetClock(String triggerValue) {
     simpleClock.countdownStop();           // pause the countdown
     toggleCountdown = "off";
     countdownClock.changeColourStruc( COUNTDOWN_COLOUR );
+    countdownClock.changeBrightness(COUNTDOWN_BRIGHTNESS);
     light_minus(true);
     light_dots(true);
     light_t(true);
-    simpleClock.countdownSetup(0, 10, 30);
+    simpleClock.countdownSetup(INITAL_HOURS, INITAL_MINS, INITAL_SECS);
 
   }
 }

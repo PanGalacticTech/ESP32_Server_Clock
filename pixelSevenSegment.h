@@ -132,6 +132,7 @@ class pixelSevenSegment {
 
     void setAllDigitsX(digitSeg X, byte r = 255, byte g = 255, byte b = 255);
 
+    void changeBrightness(byte bright = 255);
 
 
 
@@ -235,7 +236,9 @@ class pixelSevenSegment {
     // Pick and Name Colours here, then add them to the colourArray to make them easily accessable
 
 
-    savedColour  skyroraBlue = { 0, 120, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+    savedColour  skyroraBlue = { 0, 80, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+
+    savedColour     pureBlue = {0, 0, 255};
 
     savedColour  offWhite = { 160, 255, 200};      // data structure for an offwhite colour, all LEDs on max (these figures chave been calibrated to produce a cleaner white)
 
@@ -259,7 +262,7 @@ class pixelSevenSegment {
     void setDotsName(savedColour newColour);
     void setStringName(uint16_t start, uint16_t to, savedColour newColour);
 
-    void flyingDigit(digitSeg in, savedColour inputColour,uint32_t animationDelay = 100);
+    void flyingDigit(digitSeg in, savedColour inputColour, uint32_t animationDelay = 100);
 
     uint8_t currentBrightness;
 

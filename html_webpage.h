@@ -147,7 +147,7 @@ void serverLoop() {
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~## Web Page CONTENT ##~~~~~~~~~~~~~~~~~~~
 
             //-------- Web Page Heading-----------------------------------------------------------------------
-            client.println("<body><h1>Skyrora Countdown Clock</h1>");
+            client.println("<body><h1>"+PAGE_HEADER+"</h1>");
 
 
 
