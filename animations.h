@@ -23,19 +23,19 @@ void animateSpace(uint32_t animationDelay = 300 ) {
 
 
 void flashSpace(uint32_t animationDelay = 100, uint32_t holdText = 500) {
-  countdownClock.setDigit(countdownClock.S, 5, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  countdownClock.setDigit(countdownClock.S, 4, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
   FastLED.show();
   delay(animationDelay);
-  countdownClock.setDigit(countdownClock.p, 4, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  countdownClock.setDigit(countdownClock.p, 3, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
   FastLED.show();
   delay(animationDelay);
-  countdownClock.setDigit(countdownClock.A, 3, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  countdownClock.setDigit(countdownClock.A, 2, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
   FastLED.show();
   delay(animationDelay);
-  countdownClock.setDigit(countdownClock.C, 2, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  countdownClock.setDigit(countdownClock.C, 1, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
   FastLED.show();
   delay(animationDelay);
-  countdownClock.setDigit(countdownClock.E, 1, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  countdownClock.setDigit(countdownClock.E, 0, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
   FastLED.show();
   delay(animationDelay);
   delay(holdText);
@@ -74,22 +74,23 @@ void flashTo(uint32_t holdText = 500) {
 
 void animateScotland(uint32_t animationDelay = 500, uint32_t holdText = 500) {
 
-  for (int j = 9; j > 0 ; j--) {
+  for (int j = 8; j > 0 ; j--) {
 
     if (j > 3) {
-      countdownClock.setDigit(countdownClock.S, 9 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.c, 8 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.o, 7 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.t, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.L, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.A, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.S, 8 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.c, 7 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.o, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.t, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.L, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.A, 3 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
     } else {
-      countdownClock.setDigit(countdownClock.t, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.L, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.A, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.n, 3 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.d, 2 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
-      countdownClock.setDigit(countdownClock.blank, 1 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.o, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.t, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.L, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.A, 3 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.n, 2 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.d, 1 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+      countdownClock.setDigit(countdownClock.blank, 0 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
     }
 
     Serial.printf("Set Digit %i 8" , j);

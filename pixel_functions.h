@@ -137,6 +137,9 @@ void displaySetup(int8_t setupBrightness) {
 
   delay(1000);
   countdownClock.setDigitsBlank();   // Set all digits to blank
+     light_dots(false);
+    light_t(false);
+    light_plus(false);
   delay(100);
   FastLED.show();
   Serial.println("Setting Digits Blank");
@@ -145,15 +148,11 @@ void displaySetup(int8_t setupBrightness) {
   //countdownClock.setAllDigitsX(countdownClock.H, 255, 255, 255);
 
   if (INTRO_ANIMATION) {
-    light_dots(false);
-    light_t(false);
-    light_plus(false);
-    FastLED.show();
-    delay(200);
-    flashFrom(100, 1000);
+
+    flashFrom(100, 900);
     countdownClock.setDigitsBlank();   // Set all digits to blank
     delay(100);
-    animateScotland(200, 700);
+    animateScotland(160, 900);
     countdownClock.setDigitsBlank();   // Set all digits to blank
     delay(100);
     flashTo(800);
