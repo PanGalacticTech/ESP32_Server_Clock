@@ -18,7 +18,7 @@
 // Load other Librarys
 //#include <buttonObject.h>
 
-#include <timeObject.h>
+#include <timeObject.h>     // Time Object Libary available at: https://github.com/PanGalacticTech/timeObject_library
 
 timeObject simpleClock;
 
